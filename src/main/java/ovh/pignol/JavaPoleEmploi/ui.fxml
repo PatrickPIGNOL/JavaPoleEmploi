@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane prefHeight="53.0" prefWidth="80.0">
+      <children>
+         <Button fx:id="CloseButton" defaultButton="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#CloseButtonOnAction" text="Close" />
+      </children></AnchorPane>
+</Scene>
