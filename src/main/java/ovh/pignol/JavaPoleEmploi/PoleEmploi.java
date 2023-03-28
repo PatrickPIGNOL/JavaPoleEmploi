@@ -1,8 +1,12 @@
 package ovh.pignol.JavaPoleEmploi;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.prefs.PreferenceChangeEvent;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 
 import ovh.pignol.JavaSelenium.Chrome;
 import ovh.pignol.JavaSelenium.Probe;
@@ -50,43 +54,34 @@ public class PoleEmploi extends Probe
 			if(vPopup != null)
 			{
 				WebElement vCloseButton = vPopup.findElement(By.xpath("/html/body/div[4]/div/div/div[1]/button"));
-				if(vCloseButton != null)
+				if(vCloseButton != null && vCloseButton.isDisplayed() && vCloseButton.isEnabled())
 				{
-					if(vCloseButton.isDisplayed() && vCloseButton.isEnabled())
-					{
-						vCloseButton.click();
-						this.mPause(1, 5);
-					}
+					vCloseButton.click();
+					this.mPause(1, 3);
 				}
 			}
 			WebElement vLEmission = pBrowser.mFindElement(By.tagName("ngb-modal-window"));
 			if(vLEmission != null)
 			{
 				WebElement vCloseButton = pBrowser.mFindElement(By.xpath("/html/body/ngb-modal-window/div/div/app-popin-pub/div/div[1]/button"));
-				if(vCloseButton != null)
+				if(vCloseButton != null && vCloseButton.isDisplayed() && vCloseButton.isEnabled())
 				{
-					if(vCloseButton.isDisplayed() && vCloseButton.isEnabled())
-					{
-						vCloseButton.click();
-						this.mPause(1, 5);
-					}
+					vCloseButton.click();
+					this.mPause(1, 3);
 				}
 			}
 			WebElement vCookies = pBrowser.mFindElement(By.id("tc-privacy-wrapper"));
 			if(vCookies != null)
 			{
 				WebElement vCloseButton = pBrowser.mFindElement(By.id("footer_tc_privacy_button_2"));
-				if(vCloseButton != null)
+				if(vCloseButton != null && vCloseButton.isDisplayed() && vCloseButton.isEnabled())
 				{
-					if(vCloseButton.isDisplayed() && vCloseButton.isEnabled())
-					{
-						vCloseButton.click();
-						this.mPause(1, 5);
-					}
+					vCloseButton.click();
+					this.mPause(1, 3);
 				}
 			}
 
-			this.mPause(3, 5);
+			this.mPause(1, 3);
 			
 			WebElement vConnectButton = pBrowser.mFindElement(By.xpath("/html/body/app-root/app-header/header/div/ul/li/div/button"));//By.id("dropdownMenu2"));
 			if(vConnectButton != null)
@@ -96,17 +91,14 @@ public class PoleEmploi extends Probe
 					vConnectButton.click();
 					this.mPause(1, 5);
 					WebElement vCandidatButton = pBrowser.mFindElement(By.className("menu-link-candidat"));
-					if(vCandidatButton != null)
+					if(vCandidatButton != null && vCandidatButton.isDisplayed() && vCandidatButton.isEnabled())
 					{
-						if(vCandidatButton.isDisplayed() && vCandidatButton.isEnabled())
-						{
-							vCandidatButton.click();
-							this.mPause(10, 1);
-						}
+						vCandidatButton.click();
+						this.mPause(5, 1);
 					}
 				}
 			}
-			WebElement vIdentifiant = pBrowser.mFindElement(By.id("identifiant"));
+			WebElement vIdentifiant = pBrowser.mFindElement(By.xpath(EPreferencesFields.User.mXPath()));
 			if(vIdentifiant != null)
 			{
 				if(vIdentifiant.isDisplayed() && vIdentifiant.isEnabled())
@@ -119,20 +111,17 @@ public class PoleEmploi extends Probe
 						{
 							vSubmitButton.click();
 							this.mPause(1, 5);
-							WebElement vPassword = pBrowser.mFindElement(By.id("password"));
+							WebElement vPassword = pBrowser.mFindElement(By.xpath(EPreferencesFields.Password.mXPath()));
 							if(vPassword != null)
 							{
 								if(vPassword.isDisplayed() && vPassword.isEnabled())
 								{
 									vPassword.sendKeys(PoleEmploiPreferences.mInstance().mPassword());
 									WebElement vSubmitButton2 = pBrowser.mFindElement(By.id("submit"));
-									if(vSubmitButton2 != null)
+									if(vSubmitButton2 != null && vSubmitButton2.isDisplayed() && vSubmitButton2.isEnabled())
 									{
-										if(vSubmitButton2.isDisplayed() && vSubmitButton2.isEnabled())
-										{
-											vSubmitButton2.click();
-											this.mPause(10, 1);											
-										}
+										vSubmitButton2.click();
+										this.mPause(1, 3);
 									}
 								}
 							}
@@ -145,20 +134,20 @@ public class PoleEmploi extends Probe
 	
 	private void mActualise(WebBrowser pBrowser)
 	{	
-		WebElement vActualiseLink = pBrowser.mFindElement(By.xpath("/html/body/app-root/ng-component/cl-layout/main/app-accueil/div/div/div/div/div[2]/div/div[1]/pn-menu-navigation/div[2]/div/ul/li[1]/div/button"));
+		WebElement vActualiseLink = pBrowser.mFindElement(By.xpath("//*[@id=\"step4\"]/div[1]/pn-menu-navigation/div[2]/div/ul/li[1]/div/button"));
 		if(vActualiseLink != null)
 		{
 			if(vActualiseLink.isDisplayed() && vActualiseLink.isEnabled())
 			{
 				vActualiseLink.click();
-				this.mPause(1,5);
-				WebElement vActualiseButton = pBrowser.mFindElement(By.xpath("/html/body/app-root/ng-component/cl-layout/main/app-accueil/div/div/div/div/div[2]/div/div[1]/pn-menu-navigation/div[2]/div/ul/li[1]/div/div/div/ul/li[1]/a"));
+				this.mPause(1, 3);
+				WebElement vActualiseButton = pBrowser.mFindElement(By.xpath("//*[@id=\"collapsePlusServiceAccueil-actualisation\"]/div/ul/li[1]/a"));
 				if(vActualiseButton != null)
 				{
 					if(vActualiseButton.isDisplayed() && vActualiseButton.isEnabled())
 					{
 						vActualiseButton.click();
-						this.mPause(10, 1);
+						this.mPause(1, 3);
 					}
 				}
 			}
@@ -172,12 +161,12 @@ public class PoleEmploi extends Probe
 				if(vPasser.isDisplayed() && vPasser.isEnabled())
 				{
 					vPasser.click();
-					this.mPause(10, 1);
+					this.mPause(1, 3);
 				}
 			}
 		}		
 		
-		if(pBrowser.mPageSource().contains("Vous avez d��j�� d��clar�� votre situation pour cette p��riode"))
+		if(pBrowser.mPageSource().contains("Vous avez déjà déclaré votre situation pour cette période"))
 		{
 			WebElement vModifierButton = pBrowser.mFindElement(By.xpath("/html/body/div/div[2]/div/div[1]/div[2]/div/div[1]/form/div/div[2]/ul/li[3]/span/button"));
 			if(vModifierButton != null)
@@ -185,147 +174,318 @@ public class PoleEmploi extends Probe
 				if(vModifierButton.isDisplayed() && vModifierButton.isEnabled())
 				{
 					vModifierButton.click();
-					this.mPause(10, 1);
+					this.mPause(1, 3);
 				}
 			}
 		}
 		
-		WebElement vFormation = pBrowser.mFindElement(By.id("formationNon"));//[@id="formationOui"]
-		if(vFormation != null)
+		if(pBrowser.mPageSource().contains("Déclarer ma situation"))
 		{
-			if(vFormation.isDisplayed() && vFormation.isEnabled())		
+			WebElement vPasser = pBrowser.mFindElement(By.xpath("//*[@id=\"btn-declare-actu\"]"));
+			if(vPasser != null)
 			{
-				vFormation.click();
-				this.mPause(1, 5);
-				WebElement vValidateButton = pBrowser.mFindElement(By.xpath("/html/body/div/div[2]/div/div[1]/div[2]/div/div[1]/form/div/div[2]/ul/li[3]/span/button"));
-				if(vValidateButton != null)
+				if(vPasser.isDisplayed() && vPasser.isEnabled())
 				{
-					if(vValidateButton.isDisplayed() && vValidateButton.isEnabled())		
-					{
-						vValidateButton.click();
-						this.mPause(1, 5);
-					}
+					vPasser.click();
+					this.mPause(1, 3);
 				}
 			}
+		}
+		
+		WebElement vWorked;/* //*[@id="action-activite-oui"] //*[@id="action-activite-non"] */
+		if(PoleEmploiPreferences.mInstance().mWorkedYes())
+		{
+			vWorked = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkedYes.mXPath()));
+		}
+		else
+		{
+			vWorked = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkedNo.mXPath()));
+		}
+		if(vWorked != null && vWorked.isDisplayed() && vWorked.isEnabled())		
+		{
+			vWorked.click();
+			this.mPause(1, 3);
+		}
+		
+		if(PoleEmploiPreferences.mInstance().mWorkedYes())
+		{
+			if(PoleEmploiPreferences.mInstance().mWorkedForSociety())
+			{
+				WebElement vWorkedForSociety = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkedForSociety.mXPath()));
+				if(vWorkedForSociety != null && vWorkedForSociety.isDisplayed() && vWorkedForSociety.isEnabled())		
+				{
+					vWorkedForSociety.click();
+					this.mPause(1, 3);
+				}
+			}
+			if(PoleEmploiPreferences.mInstance().mWorkedMySociety())
+			{
+				WebElement vWorkedMySociety = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkedMySociety.mXPath()));
+				if(vWorkedMySociety != null && vWorkedMySociety.isDisplayed() && vWorkedMySociety.isEnabled())		
+				{
+					vWorkedMySociety.click();
+					this.mPause(1, 3);
+				}
+			}
+			WebElement vWorkedSociety = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkedSociety.mXPath()));
+			if(vWorkedSociety != null && vWorkedSociety.isDisplayed() && vWorkedSociety.isEnabled())
+			{
+				vWorkedSociety.sendKeys(PoleEmploiPreferences.mInstance().mWorkedSociety());
+			}
+			WebElement vWorkHours = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkHours.mXPath()));
+			if(vWorkHours != null && vWorkHours.isDisplayed() && vWorkHours.isEnabled())
+			{
+				vWorkHours.sendKeys(PoleEmploiPreferences.mInstance().mWorkHours().toString());
+			}
+			WebElement vSalaryAmount = pBrowser.mFindElement(By.xpath(EPreferencesFields.SalaryAmount.mXPath()));
+			if(vSalaryAmount != null && vSalaryAmount.isDisplayed() && vSalaryAmount.isEnabled())
+			{
+				vSalaryAmount.sendKeys(PoleEmploiPreferences.mInstance().mSalaryAmount().toString());
+			}
+			Select vWorkFrom = new Select(pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkFrom.mXPath())));
+			if(vWorkFrom != null && ((WebElement) vWorkFrom).isDisplayed() && ((WebElement) vWorkFrom).isEnabled())
+			{
+				if(PoleEmploiPreferences.mInstance().mWorkFrom().equals("0: null"))
+				{
+					vWorkFrom.selectByValue(PoleEmploiPreferences.mInstance().mWorkFrom());
+				}
+				else
+				{
+					String vValue;
+					LocalDate vDate = LocalDate.now();
+					Integer vMonth;
+					if(vDate.getDayOfMonth() < 16)
+					{
+						if(vDate.getMonthValue() == 1)
+						{
+							vMonth = 12;
+						}
+						else
+						{
+							vMonth = vDate.getMonthValue() - 1;
+						}
+					}
+					else
+					{
+						vMonth = vDate.getMonthValue();
+					}	
+					Integer vYear = vDate.getYear();
+					Calendar vCalendar = Calendar.getInstance();
+					vCalendar.clear();
+					vCalendar.set(vYear, vMonth - 1, 1);
+					Integer vMaxDays = vCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+					if(Integer.parseInt(PoleEmploiPreferences.mInstance().mWorkFrom()) > vMaxDays)
+					{
+						vValue = vMaxDays.toString() + "/" + vMonth.toString() + "/" + vYear.toString();
+					}
+					else
+					{
+						vValue = PoleEmploiPreferences.mInstance().mWorkFrom() + "/" + vMonth.toString() + "/" + vYear.toString();
+					}
+					vWorkFrom.selectByValue(vValue);
+				}
+			}
+			Select vWorkTo = new Select(pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkFrom.mXPath())));
+			if(vWorkTo != null && ((WebElement) vWorkTo).isDisplayed() && ((WebElement) vWorkFrom).isEnabled())
+			{
+				if(PoleEmploiPreferences.mInstance().mWorkTo().equals("0: null"))
+				{
+					vWorkTo.selectByValue(PoleEmploiPreferences.mInstance().mWorkTo());
+				}
+				else
+				{
+					String vValue;
+					LocalDate vDate = LocalDate.now();
+					Integer vMonth;
+					if(vDate.getDayOfMonth() < 16)
+					{
+						if(vDate.getMonthValue() == 1)
+						{
+							vMonth = 12;
+						}
+						else
+						{
+							vMonth = vDate.getMonthValue() - 1;
+						}
+					}
+					else
+					{
+						vMonth = vDate.getMonthValue();
+					}	
+					Integer vYear = vDate.getYear();
+					Calendar vCalendar = Calendar.getInstance();
+					vCalendar.clear();
+					vCalendar.set(vYear, vMonth - 1, 1);
+					Integer vMaxDays = vCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+					if(Integer.parseInt(PoleEmploiPreferences.mInstance().mWorkTo()) > vMaxDays)
+					{
+						vValue = vMaxDays.toString() + "/" + vMonth.toString() + "/" + vYear.toString();
+					}
+					else
+					{
+						vValue = PoleEmploiPreferences.mInstance().mWorkTo() + "/" + vMonth.toString() + "/" + vYear.toString();
+					}
+					vWorkTo.selectByValue(vValue);
+				}
+			}
+		}
+		
+		WebElement vValidateButton = pBrowser.mFindElement(By.xpath("//*[@id=\"submit-activites\"]"));
+		if(vValidateButton != null && vValidateButton.isDisplayed() && vValidateButton.isEnabled())		
+		{
+			vValidateButton.click();
+			this.mPause(1, 3);
 		}
 	}
 	
 	private void mActualisePage2(WebBrowser pBrowser)
 	{
-		//"Avez-vous travaillé ou exercé une activité non salariée ?"
-		//"Oui"[@id="blocTravail-open"]
-		//"Non"[@id="blocTravail-close"]
-		//[@id="nbHeuresTrav"]"Heures travaillées dans le mois [____] heures"
-		//[@id="montSalaire"] "Montant total de votre ou vos salaires bruts réels ou estimés [____]€
-		WebElement vTravailNon = pBrowser.mFindElement(By.id("blocTravail-close"));		
-		if(vTravailNon != null)
+		WebElement vStage;
+		if(PoleEmploiPreferences.mInstance().mStageYes())
 		{
-			if(vTravailNon.isDisplayed() && vTravailNon.isEnabled())		
+			vStage = pBrowser.mFindElement(By.xpath(EPreferencesFields.StageYes.mXPath()));			
+		}
+		else
+		{
+			vStage = pBrowser.mFindElement(By.xpath(EPreferencesFields.StageNo.mXPath()));			
+		}
+		if(vStage != null && vStage.isDisplayed() && vStage.isEnabled())		
+		{
+			vStage.click();
+			this.mPause(1, 3);
+		}
+
+		if(PoleEmploiPreferences.mInstance().mStageYes())
+		{
+			WebElement vStageName = pBrowser.mFindElement(By.xpath(EPreferencesFields.StageName.mXPath()));
+			if(vStageName != null && vStageName.isDisplayed() && vStageName.isEnabled())
 			{
-				vTravailNon.click();
-				this.mPause(1, 3);
+				vStageName.sendKeys(PoleEmploiPreferences.mInstance().mStageName());
+			}
+			WebElement vStageFrom = pBrowser.mFindElement(By.xpath(EPreferencesFields.StageFrom.mXPath()));
+			if(vStageFrom != null && vStageFrom.isDisplayed() && vStageFrom.isEnabled())
+			{
+				vStageFrom.sendKeys(PoleEmploiPreferences.mInstance().mStageFrom());
+			}
+			WebElement vStageTo = pBrowser.mFindElement(By.xpath(EPreferencesFields.StageTo.mXPath()));
+			if(vStageTo != null && vStageTo.isDisplayed() && vStageTo.isEnabled())
+			{
+				vStageTo.sendKeys(PoleEmploiPreferences.mInstance().mStageTo());
+			}
+		}
+		WebElement vMaladie;
+		if(PoleEmploiPreferences.mInstance().mDeaceaseBreakYes())
+		{
+			vMaladie = pBrowser.mFindElement(By.xpath(EPreferencesFields.DeaceaseBreakYes.mXPath()));			
+		}
+		else
+		{
+			vMaladie = pBrowser.mFindElement(By.xpath(EPreferencesFields.DeaceaseBreakNo.mXPath()));			
+		}
+		if(vMaladie != null && vMaladie.isDisplayed() && vMaladie.isEnabled())	
+		{
+			vMaladie.click();
+			this.mPause(1, 3);
+		}
+		if(PoleEmploiPreferences.mInstance().mDeaceaseBreakYes())
+		{
+			WebElement vMaladieFrom = pBrowser.mFindElement(By.xpath(EPreferencesFields.DeaceaseBreakFrom.mXPath()));
+			if(vMaladieFrom != null && vMaladieFrom.isDisplayed() && vMaladieFrom.isEnabled())
+			{
+				vMaladieFrom.sendKeys(PoleEmploiPreferences.mInstance().mDeaceaseBreakFrom());
+			}
+			WebElement vMaladieTo = pBrowser.mFindElement(By.xpath(EPreferencesFields.DeaceaseBreakTo.mXPath()));
+			if(vMaladieTo != null && vMaladieTo.isDisplayed() && vMaladieTo.isEnabled())
+			{
+				vMaladieTo.sendKeys(PoleEmploiPreferences.mInstance().mDeaceaseBreakTo());
 			}
 		}
 		
-		//"Avez-vous été en stage ?"
-		//"Oui"[@id="blocStage-open"]
-		//"Non"[@id="blocStage-close"]
-		//"Du "[@id="dateDebutStage"] JJ/MM/AAAA
-		//"au "[@id="dateFinStage"] JJ/MM/AAAA		
-		WebElement vStageNon = pBrowser.mFindElement(By.id("blocStage-close"));
-		if(vStageNon != null)
+		WebElement vRetraite;
+		if(PoleEmploiPreferences.mInstance().mNewRetreatRentYes())
 		{
-			if(vStageNon.isDisplayed() && vStageNon.isEnabled())		
+			vRetraite = pBrowser.mFindElement(By.xpath(EPreferencesFields.NewRetreatRentYes.mXPath()));
+		}
+		else
+		{
+			vRetraite = pBrowser.mFindElement(By.xpath(EPreferencesFields.NewRetreatRentNo.mXPath()));
+		}
+		if(vRetraite != null && vRetraite.isDisplayed() && vRetraite.isEnabled())
+		{
+			vRetraite.click();
+			this.mPause(1, 3);
+		}
+		
+		if(PoleEmploiPreferences.mInstance().mNewRetreatRentYes())
+		{
+			if(PoleEmploiPreferences.mInstance().mNewRetreatRent())
 			{
-				vStageNon.click();
-				this.mPause(1, 3);
+				WebElement vNewRetreatRent = pBrowser.mFindElement(By.xpath(EPreferencesFields.NewRetreatRent.mXPath()));
+				if(vNewRetreatRent != null && vNewRetreatRent.isDisplayed() && vNewRetreatRent.isEnabled())
+				{
+					vNewRetreatRent.click();
+					WebElement vRetreatRentFrom = pBrowser.mFindElement(By.xpath(EPreferencesFields.NewRetreatRentFrom.mXPath()));
+					if(vRetreatRentFrom != null && vRetreatRentFrom.isDisplayed() && vRetreatRentFrom.isEnabled())
+					{
+						vRetreatRentFrom.sendKeys(PoleEmploiPreferences.mInstance().mNewRetreatRentFrom());
+					}
+				}
 			}
 		}
 		
-		//"Avez-vous été en arrêt maladie ?"
-		//"Oui"[@id="blocMaladie-open"]
-		//"Non"[@id="blocMaladie-close"]
-		//"Du"[@id="dateDebutMaladie"] JJ/MM/AAAA
-		//"au"[@id="dateFinMaladie"] JJ/MM/AAAA
-		WebElement vMaladieNon = pBrowser.mFindElement(By.id("blocMaladie-close"));
-		if(vMaladieNon != null)
-		{
-			if(vMaladieNon.isDisplayed() && vMaladieNon.isEnabled())		
-			{
-				vMaladieNon.click();
-				this.mPause(1, 3);
-			}
-		}
-		
-		//"Percevez-vous une nouvelle pension retraite ?"
-		//"Oui"[@id="blocRetraite-open
-		//"Non"[@id="blocRetraite-close
-		//"Depuis le"[@id="dateRetraite"] JJ/MM/AAAA
-		WebElement vRetraiteNon = pBrowser.mFindElement(By.id("blocRetraite-close"));
-		if(vRetraiteNon != null)
-		{
-			if(vRetraiteNon.isDisplayed() && vRetraiteNon.isEnabled())		
-			{
-				vRetraiteNon.click();
-				this.mPause(1, 3);
-			}
-		}
-		
-		//"Percevez-vous une nouvelle pension d'invalidité de 2ème ou 3ème catégorie ?"
-		//"Oui"[@id="blocInvalidite-open"]
-		//"Non"[@id="blocInvalidite-close"]
-		//"Depuis le"[@id="dateInvalidite"] JJ/MM/AAAA		
-		WebElement vInvaliditeNon = pBrowser.mFindElement(By.id("blocInvalidite-close"));
-		if(vInvaliditeNon != null)
-		{
-			if(vInvaliditeNon.isDisplayed() && vInvaliditeNon.isEnabled())		
-			{
-				vInvaliditeNon.click();
-				this.mPause(1, 3);
-			}
-		}
-		//"Etes-vous toujours à la recherche d'un emploi ?"
-		//"Oui"[@id="blocRecherche-close"]
-		//"Non"[@id="blocRecherche-open"]
-		//"Vous n'êtes plus à la recherche d'un emploi depuis le"[@id="dateFinRech"]
-		//"Pour quel motif ?"
-		//[@id="motifFinRechReprise"]"Reprise du travail"
-		//[@id="motifFinRechRetraite"]"Retraite"
-		//[@id="motifFinRechAutre"]"Autre
-		WebElement vRechercheOui = pBrowser.mFindElement(By.id("blocRecherche-close"));
-		if(vRechercheOui != null)
-		{
-			if(vRechercheOui.isDisplayed() && vRechercheOui.isEnabled())		
-			{
-				vRechercheOui.click();
-				this.mPause(1, 3);
-			}
-		}
-		
-		
-		WebElement vValiderButton = pBrowser.mFindElement(By.xpath("/html/body/div/div[2]/div/div[1]/div[2]/div/div[1]/form/div/div[3]/ul/li[3]/span/button"));
+		WebElement vValiderButton = pBrowser.mFindElement(By.xpath("//*[@id=\"submit-situation-particuliere\"]"));
 		if(vValiderButton != null)
 		{
 			if(vValiderButton.isDisplayed() && vValiderButton.isEnabled())		
 			{
 				vValiderButton.click();
-				this.mPause(10, 1);
+				this.mPause(1, 3);
 			}
 		}
 	}
 	
 	private void mValiderReponse(WebBrowser pBrowser)
 	{
-		WebElement vValiderButton = pBrowser.mFindElement(By.xpath("/html/body/div/div[2]/div/div[1]/div[2]/div/div[1]/form/div/div[2]/ul/li[3]/span/button"));
-		if(vValiderButton != null)
+		WebElement vRecherche;
+		if(PoleEmploiPreferences.mInstance().mWorkingResearchYes())
 		{
-			if(vValiderButton.isDisplayed() && vValiderButton.isEnabled())		
-			{
-				vValiderButton.click();
-				this.mPause(10, 1);
-			}		
+			vRecherche = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkingResearchYes.mXPath()));
 		}
-		//TODO: Ajouter le téléchargement du justificatif
+		else
+		{
+			vRecherche = pBrowser.mFindElement(By.xpath(EPreferencesFields.WorkingResearchNo.mXPath()));
+		}
+		if(vRecherche != null && vRecherche.isDisplayed() && vRecherche.isEnabled())
+		{
+			vRecherche.click();
+			this.mPause(1, 3);
+		}
+		if(PoleEmploiPreferences.mInstance().mWorkingResearchYes())
+		{
+			
+		}
+	
+		WebElement vValiderButton = pBrowser.mFindElement(By.xpath("//*[@id=\"btn-valider-actu\"]"));
+		if(vValiderButton != null && vValiderButton.isDisplayed() && vValiderButton.isEnabled())		
+		{
+			vValiderButton.click();
+			this.mPause(1, 3);
+		}
+		if(pBrowser.mPageSource().contains("Êtes-vous d'accord pour répondre à un court sondage pour améliorer le service Actualisation ?"))
+		{
+			WebElement vNon = pBrowser.mFindElement(By.xpath("//*[@id=\"QID1-2-label\"]"));
+			if(vNon != null && vNon.isDisplayed() && vNon.isEnabled())
+			{
+				vNon.click();
+				this.mPause(1, 3);
+			}
+			WebElement vNext = pBrowser.mFindElement(By.xpath("//*[@id=\"NextButton\"]"));
+			if(vNext != null && vNext.isDisplayed() && vNext.isEnabled())
+			{
+				vNext.click();
+				this.mPause(1, 3);
+			}
+		}
 	}
 	private void mQuitter(WebBrowser pBrowser)
 	{
